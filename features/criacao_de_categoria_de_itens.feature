@@ -52,3 +52,9 @@ Scenario: removendo prato de uma categoria
 	Then Eu posso visualizar a categoria “todos” com o prato “lagosta com fritas” e com o prato “moqueca de peixe”
 	And A Categoria “frutos do mar” tem apenas o prato “lagosta com fritas”
 
+Scenario: falha ao adicionar categoria já existente
+	Given Eu estou na página do “restaurante do carlito” logado como administrador do restaurante
+	And Existe uma categoria chamada “frutos do mar”
+	When Eu tento adicionar uma novo categoria chamada “frutos do mar”
+	Then Eu posso visualizar uma falha que informa que já existe uma categoria com este nome
+
