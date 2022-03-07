@@ -67,7 +67,16 @@ Scenario: falha ao tentar remover prato pertencente a uma única categoria
 	When Eu tento remover o prato “moqueca de peixe” da categoria “frutos do mar”
 	Then Eu posso visualizar uma falha que informa que o prato não pode ficar sem nenhuma categoria
 
-Scenario: falha ao tentar remover prato pertencente a uma única categoria
+Scenario: falha ao tentar remover prato pertencente a uma única categoria 2
+        Given Eu estou na página do “restaurante do carlito” logado como administrador do restaurante
+        And Existe o prato “lagosta com fritas” no “restaurante do carlito”
+        And Existe o prato “moqueca de peixe” no “restaurante do carlito”
+        And Existe uma categoria “frutos do mar” com o prato “lagosta com fritas” e “moqueca de peixe”
+        And Existe uma categoria “todos” sem nenhum prato
+        When Eu tento remover o prato “moqueca de peixe” da categoria “frutos do mar”
+	Then Eu posso visualizar uma falha que informa que o prato não pode ficar sem nenhuma categoria
+
+Scenario: falha ao tentar remover prato pertencente a uma única categoria 3
         Given Eu estou na página do “restaurante do carlito” logado como administrador do restaurante
         And Existe o prato “lagosta com fritas” no “restaurante do carlito”
         And Existe o prato “moqueca de peixe” no “restaurante do carlito”
