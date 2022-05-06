@@ -3,12 +3,18 @@ import React, {useState} from "react";
 import Add from "./Add";
 import ConfimationBox from "./ConfimationBox";
 import Item from './Item';
-
+import Cattegory from "./Cattegory";
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Divider from '@mui/material/Divider';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 
+<<<<<<< HEAD
 const Menu = ({
     isMenu, 
     setAlert, 
@@ -20,6 +26,9 @@ const Menu = ({
     setShowItems
 }) => {
     
+=======
+const Menu = ({isMenu, open, setOpen,category,setCategory, showItems, setShowItems}) => {
+>>>>>>> Menu alterado para funcionar com a exibição de categorias
     const [toDelete, setToDelete] = useState([]);
     
     const [openPopUp, setOpenPopUp] = useState(false);
@@ -39,6 +48,13 @@ const Menu = ({
                 showItems={showItems} 
                 setShowItems={setShowItems}
             />
+
+            <Cattegory
+                open={category}
+                setOpen={setCategory}
+                showItems={showItems} 
+                setShowItems={setShowItems}
+            />
             
             <ConfimationBox
                 dataList={toDelete}
@@ -52,13 +68,15 @@ const Menu = ({
 
             {!isMenu
                 ?
-                <div className="navigation"> 
+                <div sx={!isMenu ? {marginLeft: 5, minWidth: 340} : {  minWidth: 340 }} className="navigation"> 
+                    <Button variant="contained" size="small" startIcon={<SettingsIcon />}onClick={() => setCategory(true)}>Category</Button>
                     <Button variant="contained" size="small" startIcon={<AddIcon />}onClick={() => setOpen(true)}>Add</Button>
                     <Button variant="contained" size="small" startIcon={<DeleteIcon />} onClick={() => handleDeleteAll()}>Delete</Button>
                 </div>
                 
                 : null
             }
+<<<<<<< HEAD
             {typeof showItems !== "undefined" && showItems.map((item) => {
                 return(
                     <Item
@@ -78,6 +96,47 @@ const Menu = ({
                         setOpenPopUp={setOpenPopUp}
                     />
                 );
+=======
+
+            {typeof showItems !== "undefined" && Object.entries(showItems).map(([category, itens]) => {
+
+                    const menu = itens.map((item) => {
+                        return(
+                            <Item
+                                isMenu={isMenu}
+                                id={item.id} 
+                                description={item.description}
+                                name={item.name}
+                                price={item.price}
+                                setAlert={setAlert}
+                                setAlertContent={setAlertContent}
+                                setAlertWarning={setAlertWarning}
+                                showItems={showItems} 
+                                setShowItems={setShowItems}
+                                toDelete={toDelete}
+                                setToDelete={setToDelete}
+                                openPopUp={openPopUp}
+                                setOpenPopUp={setOpenPopUp}
+                            />
+                        );
+                    })
+                    return (
+                        <React.Fragment>
+                            <div>
+                            <Card variant="outlined" sx={!isMenu ? {marginLeft: 5, minWidth: 340} : {  minWidth: 340}}>
+                                <CardContent>
+                                    <Typography align="center" variant="h5" component="div">
+                                        {category}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                            <Divider sx={!isMenu ? {marginLeft: 5, minWidth: 340} : {  minWidth: 340}} />
+                            </div>
+                            
+                            {menu}
+                        </React.Fragment>
+                        )
+>>>>>>> Menu alterado para funcionar com a exibição de categorias
             })}
 
         </div>
